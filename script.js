@@ -100,11 +100,10 @@ boton_enviar.addEventListener('click', (e) => {
 
   canvas.toBlob(blob => {
     const formData = new FormData();
-    formData.append('chat_id', CHAT_ID);
     formData.append('photo', blob, 'dibujo.png');
     formData.append('caption', `${nombre} te mandó un dibujo!`);
 
-    fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`, {
+    fetch(APPS_SCRIPT_URL, {
       method: 'POST',
       body: formData,
     })
