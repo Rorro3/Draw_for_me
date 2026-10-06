@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estilos.css">
+    <title>Hii</title>
+</head>
+
+<body>
+    <div class="primero" id="primera_parte">
+        <div class="pregunta">
+            <p>HI!</p>
+        </div>
+        <div class="botones">
+            <button class="boton_si" id="primer_boton">
+                Hiii
+            </button>
+        </div>
+    </div>
+
+    <div class="segunda_parte" id="segunda_parte">
+        <div class="texto">
+            <p>Dibujá lo que quieras y escribime tu nombre!</p>
+            <p>Luego apretá "Enviar"</p>
+        </div>
+        <div class="contenedor_dibujo">
+            <div class="dibujito">
+                <canvas id="lienzo" width="500" height="500"></canvas>
+            </div>
+            <div class="panel_lateral">
+                <div class="herramientas">
+                    <label for="colorPicker">Color:</label>
+                    <input type="color" id="colorPicker" value="#b1c6cfd9">
+                    <button class="boton_si" id="boton_goma">Goma</button>
+                    <button class="boton_si" id="boton_limpiar">Limpiar</button>
+                </div>
+            </div>
+        </div>
+        <label><input type="text" id="nombre" class="nombre" placeholder="Nombre..."></label>
+        <button class="boton_si" id="boton_enviar">Enviar</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
