@@ -7,7 +7,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: linear-gradient(#B1C6CFD9), url('imgs/estrellas_4.jpg');
+  background-image: linear-gradient(rgba(177, 198, 207, 0.85)), url('imgs/estrellas_4.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
