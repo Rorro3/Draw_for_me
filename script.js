@@ -98,32 +98,43 @@ boton_enviar.addEventListener('click', (e) => {
 
   const nombre = input_nombre.value.trim();
 
-  canvas.toBlob(blob => {
-    const formData = new FormData();
-    formData.append('photo', blob, 'dibujo.png');
-    formData.append('caption', `${nombre} te mandó un dibujo!`);
+  // esto lo habia hecho antes para guardar el dibujo en base64
+  const base64Data = canvas.toDataURL('image/png').replace(/^data:image\/png;base64,/, '');
 
-    fetch(APPS_SCRIPT_URL, {
-      method: 'POST',
-      body: formData,
+  boton_enviar.disabled = true;
+  boton_enviar.textContent = 'Enviando...';
+
+  // envia como JSON
+  fetch(APPS_SCRIPT_URL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'text/plain;charset=utf-8',
+    },
+    body: JSON.stringify({
+      dibujo: base64Data,
+      nombre: nombre
     })
-      .then(res => res.json())
-      .then(data => {
-        if (data.ok) {
-          alert(`Gracias, ${nombre}! Tu dibujo fue enviado a Telegram.`);
-          ctx.clearRect(0, 0, canvas.width, canvas.height);
-          input_nombre.value = '';
-          primera_parte.style.display = 'flex';
-          segunda_parte.style.display = 'none';
-          historial = [];
-        } else {
-          console.error(data);
-          alert('Hubo un error al enviar a Telegram. Revisa el token o chat ID.');
-        }
-      })
-      .catch(err => {
-        console.error(err);
-        alert('Error de conexión.');
-      });
-  }, 'image/png');
+  })
+    .then(res => res.json())
+    .then(data => {
+      if (data.ok) {
+        alert(`Gracias, ${nombre}! Tu dibujo fue enviado a Telegram.`);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        input_nombre.value = '';
+        primera_parte.style.display = 'flex';
+        segunda_parte.style.display = 'none';
+        historial = [];
+      } else {
+        console.error('Error desde el servidor:', data);
+        alert('Hubo un error en el servidor de Apps Script.');
+      }
+    })
+    .catch(err => {
+      console.error('Error de conexión:', err);
+      alert('Error de conexión al enviar el dibujo.');
+    })
+    .finally(() => {
+      boton_enviar.disabled = false;
+      boton_enviar.textContent = 'Enviar';
+    });
 });
