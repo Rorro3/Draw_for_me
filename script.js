@@ -5,6 +5,7 @@ const boton_enviar = document.getElementById('boton_enviar');
 const input_nombre = document.getElementById('nombre');
 const canvas = document.getElementById("lienzo");
 const botonGoma = document.getElementById('boton_goma');
+const botonLapiz = document.getElementById('boton_lapiz');
 const botonLimpiar = document.getElementById('boton_limpiar');
 const colorPicker = document.getElementById('colorPicker');
 const ctx = canvas.getContext("2d");
@@ -75,6 +76,10 @@ colorPicker.addEventListener('input', (e) => {
 // goma
 botonGoma.addEventListener('click', () => {
   colorActual = '#FFFFFF';
+});
+
+botonLapiz.addEventListener('click', () => {
+  colorActual = '#000000';
 });
 
 // lipoar
